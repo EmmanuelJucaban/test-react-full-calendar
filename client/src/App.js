@@ -66,10 +66,10 @@ function App() {
           console.log(data);
         }}
       >Submit date</Button>
-
+      {/**/}
       <FullCalendar
         // height='auto'
-        timezone='UTC'
+        timezone='local'
         contentHeight={600}
         events={events || []}
         plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin, ]}
