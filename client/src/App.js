@@ -19,9 +19,11 @@ function App() {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get('/api/events');
+      console.log(data);
       setEvents(data);
     })();
   }, []);
+
   return (
     <div className="App">
       <TextField
@@ -67,7 +69,7 @@ function App() {
 
       <FullCalendar
         // height='auto'
-        timezone='local'
+        timezone='UTC'
         contentHeight={600}
         events={events || []}
         plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin, ]}

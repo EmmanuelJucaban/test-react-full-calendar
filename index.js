@@ -28,12 +28,12 @@ const eventSchema = new mongoose.Schema({
     default: Date.now(),
   },
   startTime: {
-    type: String,
-    default: '',
+    type: Date,
+    default: Date.now(),
   },
   endTime: {
-    type: String,
-    default: '',
+    type: Date,
+    default: Date.now(),
   },
 });
 
@@ -58,6 +58,8 @@ app.post('/api/events', async (req, res) => {
   const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1);
   const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1);
 
+  console.log(start);
+  console.log(end);
   const newEvent = await Event.create({
     title: values.title,
     start,
