@@ -20,7 +20,12 @@ function App() {
     (async () => {
       const { data } = await axios.get('/api/events');
       console.log(data);
-      setEvents(data);
+      const eventFormatted = data.map(event => ({
+        ...event,
+        startTime: event.startTime.toLocaleString(),
+        endTime: event.endTime.toLocaleString(),
+      }))
+      setEvents(eventFormatted);
     })();
   }, []);
 
