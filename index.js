@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require("mongoose");
 const { subMonths } = require('date-fns');
-const PORT = process.env.NODE_ENV || 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
