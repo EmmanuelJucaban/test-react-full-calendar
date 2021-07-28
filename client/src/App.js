@@ -7,7 +7,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
+import { DateTime } from 'luxon';
+import moment from 'moment';
 function App() {
   const [ events, setEvents ] = useState([]);
   const [ title, setTitle ] = useState('');
@@ -22,8 +23,8 @@ function App() {
       console.log(data);
       const eventFormatted = data.map(event => ({
         ...event,
-        startTime: event.startTime.toLocaleString(),
-        endTime: event.endTime.toLocaleString(),
+        startTime: DateTime.fromISO(event.startTime).toString(),
+        endTime: DateTime.fromISO(event.endTime).toString(),
       }))
       setEvents(eventFormatted);
     })();

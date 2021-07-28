@@ -63,11 +63,9 @@ app.post('/api/events', async (req, res) => {
   const start = DateTime.fromObject({
     year: parseInt(startYear),
     day: parseInt(startDay),
-    hour: parseInt(startHour)
-    , minute: parseInt(startMinutes),
-    month: parseInt(startMonth)
-  }, {
-    zone: 'America/Chicago'
+    hour: parseInt(startHour),
+    minute: parseInt(startMinutes),
+    month: parseInt(startMonth),
   });
 
   const end = DateTime.fromObject({
@@ -76,8 +74,6 @@ app.post('/api/events', async (req, res) => {
     hour: parseInt(endHour)
     , minute: parseInt(endMinutes),
     month: parseInt(endMonth)
-  }, {
-    zone: 'America/Chicago'
   });
   console.log(start)
   // Local
