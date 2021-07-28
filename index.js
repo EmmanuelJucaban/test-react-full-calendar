@@ -51,13 +51,15 @@ app.post('/api/events', async (req, res) => {
   const [ startYear, startMonth, startDay, ] = values.startDate.split('-');
   const [ startHour, startMinutes ] = values.startTime.split(':');
 
-  const customFields = [];
   const [ endYear, endMonth, endDay, ] = values.endDate.split('-');
   const [ endHour, endMinutes ] = values.endTime.split(':');
 
   const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1);
   const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1);
 
+  // Local
+  // [0] 2021-07-29T00:00:00.000Z
+  //   [0] 2021-07-29T01:00:00.000Z
   console.log(start);
   console.log(end);
   const newEvent = await Event.create({
@@ -67,7 +69,16 @@ app.post('/api/events', async (req, res) => {
     startTime: start,
     endTime: end,
   });
-
+// Local
+// {
+//     start: 2021-07-29T00:00:00.000Z,
+//       end: 2021-07-29T01:00:00.000Z,
+//       startTime: 2021-07-29T00:00:00.000Z,
+//       endTime: 2021-07-29T01:00:00.000Z,
+//       _id: 6101ba42de0d47e76501d08f,
+//       title: 'Test the moment',
+//       __v: 0
+//     }
   console.log(newEvent);
   res.json(newEvent);
 
