@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 const { subMonths } = require('date-fns');
 const PORT = process.env.PORT || 3001;
-
+const { DateTime } = require('luxon');
 const app = express();
 
 
@@ -13,8 +13,9 @@ if (process.env.NODE_ENV === 'production') {
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
-}).then(() => {
-  console.log('yeee');
+}).then(async () => {
+  // console.log('yeee');
+  // await Event.deleteMany({});
 }).catch(e => console.log(e));
 
 const eventSchema = new mongoose.Schema({
@@ -35,6 +36,7 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  offSet: {},
 });
 
 const Event = mongoose.model('Event', eventSchema);
@@ -54,10 +56,30 @@ app.post('/api/events', async (req, res) => {
   const [ endYear, endMonth, endDay, ] = values.endDate.split('-');
   const [ endHour, endMinutes ] = values.endTime.split(':');
 
-  const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1);
-  const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1);
+  // const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1);
+  // const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1);
 
 
+  const start = DateTime.fromObject({
+    year: parseInt(startYear),
+    day: parseInt(startDay),
+    hour: parseInt(startHour)
+    , minute: parseInt(startMinutes),
+    month: parseInt(startMonth)
+  }, {
+    zone: 'America/Chicago'
+  });
+
+  const end = DateTime.fromObject({
+    year: parseInt(endYear),
+    day: parseInt(endDay),
+    hour: parseInt(endHour)
+    , minute: parseInt(endMinutes),
+    month: parseInt(endMonth)
+  }, {
+    zone: 'America/Chicago'
+  });
+  console.log(start)
   // Local
   // [0] 2021-07-29T00:00:00.000Z
   //   [0] 2021-07-29T01:00:00.000Z
