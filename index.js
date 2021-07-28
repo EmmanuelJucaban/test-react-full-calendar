@@ -54,8 +54,8 @@ app.post('/api/events', async (req, res) => {
   const [ endYear, endMonth, endDay, ] = values.endDate.split('-');
   const [ endHour, endMinutes ] = values.endTime.split(':');
 
-  const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1);
-  const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1);
+  const start = subMonths(new Date(startYear, startMonth, startDay, startHour, startMinutes), 1).toLocaleTimeString("en-US", { timeZone: 'America/Chicago' });
+  const end = subMonths(new Date(endYear, endMonth, endDay, endHour, endMinutes), 1).toLocaleTimeString("en-US", { timeZone: 'America/Chicago' });
 
   // Local
   // [0] 2021-07-29T00:00:00.000Z
